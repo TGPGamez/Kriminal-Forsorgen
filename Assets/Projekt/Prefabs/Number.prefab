@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5383738565647023106}
-  - component: {fileID: 996245853717712185}
+  - component: {fileID: 4733475451602737886}
   m_Layer: 0
   m_Name: Affordance
   m_TagString: Untagged
@@ -270,7 +270,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 684540179034520744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &996245853717712185
+--- !u!114 &4733475451602737886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,19 +279,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2156424316595393522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c83f12c537584f51b92c01f10d7090c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 49e0a5b5ff5540f5b14dd29d46faec22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransitionDuration: 0.125
-  m_InteractorSource: {fileID: 0}
+  m_InteractableSource: {fileID: 8215101055725748318}
   m_IgnoreHoverEvents: 0
+  m_IgnoreHoverPriorityEvents: 1
+  m_IgnoreFocusEvents: 1
   m_IgnoreSelectEvents: 0
-  m_IgnoreActivateEvents: 1
-  m_IgnoreUGUIHover: 1
-  m_IgnoreUGUISelect: 0
-  m_IgnoreXRInteractionEvents: 0
+  m_IgnoreActivateEvents: 0
   m_SelectClickAnimationMode: 1
-  m_ActivateClickAnimationMode: 1
+  m_ActivateClickAnimationMode: 0
   m_ClickAnimationDuration: 0.25
   m_ClickAnimationCurve:
     m_UseConstant: 1
