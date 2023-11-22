@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayText: 1
-  spawnObject: {fileID: 2050160876582275394, guid: d00fc123cb8ac2144b852cd4b551aabd, type: 3}
+  spawnPrefab: {fileID: 2050160876582275394, guid: d00fc123cb8ac2144b852cd4b551aabd, type: 3}
   spawnPoint: {fileID: 5758017665038304038}
   groupObjects: {fileID: 7160833688162583593}
 --- !u!1 &7160833688162583593
