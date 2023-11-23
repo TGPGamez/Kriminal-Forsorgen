@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 3938196979258494156}
   - component: {fileID: 8215101055725748318}
   - component: {fileID: 7071627785753236577}
+  - component: {fileID: -6090688794434776953}
   m_Layer: 0
   m_Name: Number
-  m_TagString: Untagged
+  m_TagString: BoardRelated
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,12 +233,30 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.06805103, z: 0.5}
   m_Center: {x: 0, y: 0.0040255077, z: 0}
+--- !u!114 &-6090688794434776953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050160876582275394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c2299febd481a84fa47f6a9b8f73460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroyEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  SnappedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2156424316595393522
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +269,7 @@ GameObject:
   - component: {fileID: 4733475451602737886}
   m_Layer: 0
   m_Name: Affordance
-  m_TagString: Untagged
+  m_TagString: BoardRelated
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -332,7 +351,7 @@ GameObject:
   - component: {fileID: 7968042673260569292}
   m_Layer: 5
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: BoardRelated
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -384,7 +403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 6
+  m_text: 8
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -467,7 +486,7 @@ GameObject:
   - component: {fileID: 8858864390980454326}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: BoardRelated
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -572,7 +591,7 @@ GameObject:
   - component: {fileID: 694999171739746168}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: BoardRelated
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -671,7 +690,7 @@ GameObject:
   - component: {fileID: 2411429964335034450}
   m_Layer: 0
   m_Name: Attach
-  m_TagString: Untagged
+  m_TagString: BoardRelated
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,16 +15,7 @@ public class NumberSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnPrefab.GetComponentInChildren<TextMeshProUGUI>().text = displayText;
         if (CanSpawn())
-        {
-            Spawn();
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (CanSpawn() && groupObjects.transform.childCount == 0)
         {
             Spawn();
         }
@@ -36,6 +28,26 @@ public class NumberSpawner : MonoBehaviour
 
     private void Spawn()
     {
-        Instantiate(spawnPrefab, spawnPoint.transform.position, Quaternion.identity, groupObjects.transform);
+        GameObject obj = Instantiate(spawnPrefab, spawnPoint.transform.position, Quaternion.identity, groupObjects.transform);
+        obj.GetComponentInChildren<TextMeshProUGUI>().text = displayText;
+
+        DeleteNumber deleteNumber = obj.GetComponent<DeleteNumber>();
+        deleteNumber.DestroyEvent.AddListener(DestroyedGO);
+        deleteNumber.SnappedEvent.AddListener(Snapped);
+    }
+    private void Snapped()
+    {
+        if (CanSpawn())
+        {
+            Spawn();
+        }
+    }
+    private void DestroyedGO()
+    {
+        
+        if (CanSpawn() && groupObjects.transform.childCount <= 1)
+        {
+            Spawn();
+        }
     }
 }

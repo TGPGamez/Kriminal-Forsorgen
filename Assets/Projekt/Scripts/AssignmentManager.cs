@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AssignmentManager : MonoBehaviour
@@ -33,8 +34,8 @@ public class AssignmentManager : MonoBehaviour
             {
 
                 Vector3 spawnVector = last == null ? 
-                    new Vector3(areaVector.x + 0.3f, areaVector.y, areaVector.z) : 
-                    new Vector3(last.transform.position.x - 0.4f, areaVector.y, areaVector.z);
+                    new Vector3(areaVector.x - 0.1f, areaVector.y, areaVector.z) : 
+                    new Vector3(last.transform.position.x - 0.15f, areaVector.y, areaVector.z);
                 last = Instantiate(answerPrefab, spawnVector, Quaternion.identity, answerArea.transform);
             }
         }
@@ -49,9 +50,9 @@ public class AssignmentManager : MonoBehaviour
 
 
     private void LoadAssignments()
-    {
-        assignments.Add(new AlgeBraAssignment("3(8+2−4)", "18"));
-        assignments.Add(new AlgeBraAssignment("8 * (5 + 10)", "120"));
+    { //"3(8+2−4)", "18", "8 * (5 + 10)", "120"
+        assignments.Add(AlgeBraAssignment.CreateComponent(gameObject, "3(8+2−4)", "18"));
+        assignments.Add(AlgeBraAssignment.CreateComponent(gameObject, "8 * (5 + 10)", "120"));
     }
 
     public void UpdateCanvases()
