@@ -14,5 +14,6 @@ public class SelectedSnapPoint : XRSocketInteractor
             deleteNumber.Snapped();
         }
         base.OnSelectEntered(args);
+        
     }
 }
