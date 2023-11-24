@@ -244,6 +244,7 @@ MonoBehaviour:
   m_SocketScaleMode: 1
   m_FixedScale: {x: 1, y: 0.2, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+  attachedObject: {fileID: 0}
 --- !u!65 &3024779028338556065
 BoxCollider:
   m_ObjectHideFlags: 0

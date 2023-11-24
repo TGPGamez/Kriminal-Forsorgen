@@ -5,15 +5,17 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class SelectedSnapPoint : XRSocketInteractor
 {
+    public GameObject attachedObject;
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
+        base.OnSelectEntered(args);
         GameObject interactObject = args.interactableObject.transform.gameObject;
         DeleteNumber? deleteNumber = interactObject.GetComponent<DeleteNumber>();
-        if (deleteNumber != null )
+        if (deleteNumber != null)
         {
+            attachedObject = interactObject;
             deleteNumber.Snapped();
         }
-        base.OnSelectEntered(args);
         
     }
 }

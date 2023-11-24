@@ -17,6 +17,7 @@ public class AssignmentManager : MonoBehaviour
     private int amountOfAssignments;
     private int currentAssignmentCount;
     private AlgeBraAssignment currentAssignment;
+    public AlgeBraAssignment CurrentAssignment { get { return currentAssignment; } }
 
     // Start is called before the first frame update
     void Start()
@@ -76,5 +77,10 @@ public class AssignmentManager : MonoBehaviour
         {
             assignmentText.text = $"{currentAssignment.AssignmentText}";
         }
+    }
+
+    public void NextAssignment()
+    {
+
     }
 }

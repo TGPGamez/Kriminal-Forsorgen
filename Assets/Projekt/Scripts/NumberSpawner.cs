@@ -37,7 +37,7 @@ public class NumberSpawner : MonoBehaviour
     }
     private void Snapped()
     {
-        if (CanSpawn())
+        if (CanSpawn() && groupObjects.transform.childCount == 0)
         {
             Spawn();
         }
