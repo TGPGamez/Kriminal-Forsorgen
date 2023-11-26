@@ -32,6 +32,19 @@ public class ResultHandler : MonoBehaviour
         }
     }
 
+    private void MarkAnswer(bool correct)
+    {
+        foreach (GameObject obj in markResponseAnswerObjects)
+        {
+            foreach (MeshRenderer mesh in obj.GetComponentsInChildren<MeshRenderer>())
+            {
+                Material original = new(mesh.material);
+                mesh.material = correct ? correctAnserMaterial : wrongAnswerMaterial;
+                StartCoroutine(BackToOriginalMat(mesh, original));
+            }
+        }
+    }
+
     private IEnumerator BackToOriginalMat(MeshRenderer meshRenderer, Material original)
     {
         yield return new WaitForSeconds(4f);
@@ -53,10 +66,5 @@ public class ResultHandler : MonoBehaviour
             result += snapPoint.attachedObject.GetComponentInChildren<TextMeshProUGUI>().text;
         }
         return result;
-    }
-
-    public void Test(string test)
-    {
-        Debug.Log(test);
     }
 }
