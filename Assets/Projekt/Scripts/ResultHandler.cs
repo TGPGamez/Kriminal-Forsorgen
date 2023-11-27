@@ -11,28 +11,23 @@ public class ResultHandler : MonoBehaviour
     [SerializeField] private List<GameObject> markResponseAnswerObjects;
     [SerializeField] private Material wrongAnswerMaterial;
     [SerializeField] private Material correctAnserMaterial;
+    [SerializeField] private GameObject correctAnswerBoard;
     public void CheckResult()
     {
         List<SelectedSnapPoint> snapPoints = GetAttachedSnappedObjects();
         string result = AttachedSnappedObjectsToResult(snapPoints);
         if (result.Equals(assignmentManager.CurrentAssignment.Result))
         {
-
+            HighlightAnswerResult(true);
+            LastAssignmentSetText();
+            correctAnswerBoard.SetActive(true);
         } else
         {
-            foreach (GameObject obj in markResponseAnswerObjects)
-            {
-                foreach(MeshRenderer mesh in obj.GetComponentsInChildren<MeshRenderer>())
-                {
-                    Material original = new(mesh.material);
-                    mesh.material = wrongAnswerMaterial;
-                    StartCoroutine(BackToOriginalMat(mesh, original));
-                }
-            }
+            HighlightAnswerResult(false);
         }
     }
 
-    private void MarkAnswer(bool correct)
+    private void HighlightAnswerResult(bool correct)
     {
         foreach (GameObject obj in markResponseAnswerObjects)
         {
@@ -47,8 +42,7 @@ public class ResultHandler : MonoBehaviour
 
     private IEnumerator BackToOriginalMat(MeshRenderer meshRenderer, Material original)
     {
-        yield return new WaitForSeconds(4f);
-        Debug.Log(original.name);
+        yield return new WaitForSeconds(3f);
         meshRenderer.material = original;
     }
 
@@ -66,5 +60,13 @@ public class ResultHandler : MonoBehaviour
             result += snapPoint.attachedObject.GetComponentInChildren<TextMeshProUGUI>().text;
         }
         return result;
+    }
+
+    private void LastAssignmentSetText()
+    {
+        if (assignmentManager.LastAssignment())
+        {
+            correctAnswerBoard.GetComponentInChildren<TextMeshProUGUI>().text = "Du har klaret alle opgaver.\nTryk for at forsætte";
+        }
     }
 }

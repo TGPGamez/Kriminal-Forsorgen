@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Projekt/Scenes/ChooseSubject.unity
+    guid: af4f267301879e74ea939673eb2ee779
+  - enabled: 1
+    path: Assets/Projekt/Scenes/ChooseModule.unity
+    guid: 6f2f54ebad770a5458815dbf471f48d7
+  - enabled: 1
     path: Assets/Projekt/Scenes/Math/Algebra.unity
     guid: 36b9d0a9284549a4cb91ce76c241144a
   m_configObjects:

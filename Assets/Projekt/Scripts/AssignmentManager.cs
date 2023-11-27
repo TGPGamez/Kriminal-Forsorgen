@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AssignmentManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class AssignmentManager : MonoBehaviour
     [SerializeField] private List<AlgeBraAssignment> assignments;
     [SerializeField] private GameObject answerArea;
     [SerializeField] private GameObject answerPrefab;
+    [SerializeField] private GameObject correctAnswerBoard;
     private int amountOfAssignments;
     private int currentAssignmentCount;
     private AlgeBraAssignment currentAssignment;
@@ -25,21 +27,9 @@ public class AssignmentManager : MonoBehaviour
         moduleText.text = moduleName;
         LoadAssignments();
         amountOfAssignments = assignments.Count;
-        currentAssignmentCount = 0;
+        currentAssignmentCount = 1;
         currentAssignment = assignments.First();
-        if (answerArea != null && answerPrefab != null)
-        {;
-            GameObject last = null;
-            Vector3 areaVector = answerArea.transform.position;
-            for (int i = 0; i < currentAssignment.Result.Length; i++)
-            {
-
-                Vector3 spawnVector = last == null ? 
-                    new Vector3(areaVector.x - 0.1f, areaVector.y, areaVector.z) : 
-                    new Vector3(last.transform.position.x - 0.15f, areaVector.y, areaVector.z);
-                last = Instantiate(answerPrefab, spawnVector, Quaternion.identity, answerArea.transform);
-            }
-        }
+        GenerateAnswerBoxes();
         UpdateCanvases();
     }
 
@@ -60,18 +50,17 @@ public class AssignmentManager : MonoBehaviour
     {
         UpdateAssignmentInfo();
         UpdateAssignment();
-        //Generate snap boxes
     }
 
-    public void UpdateAssignmentInfo()
+    private void UpdateAssignmentInfo()
     {
         if (assignmentInfo != null)
         {
-            assignmentInfo.text = $"Opgave {currentAssignmentCount+1}/{amountOfAssignments}";
+            assignmentInfo.text = $"Opgave {currentAssignmentCount}/{amountOfAssignments}";
         }
     }
 
-    public void UpdateAssignment()
+    private void UpdateAssignment()
     {
         if (assignmentText != null)
         {
@@ -81,6 +70,53 @@ public class AssignmentManager : MonoBehaviour
 
     public void NextAssignment()
     {
+        if (!LastAssignment())
+        {
+            currentAssignmentCount++;
+            assignments.RemoveAt(0);
+            currentAssignment = assignments.First();
+            correctAnswerBoard.SetActive(false);
+            RemoveAnswerBoxes();
+            GenerateAnswerBoxes();
+            UpdateCanvases();
+        } else
+        {
+            SceneManager.LoadScene("ChooseModule");
+        }
+    }
 
+
+    private void GenerateAnswerBoxes()
+    {
+        if (answerArea != null && answerPrefab != null)
+        {
+            GameObject last = null;
+            Vector3 areaVector = answerArea.transform.position;
+            for (int i = 0; i < currentAssignment.Result.Length; i++)
+            {
+
+                Vector3 spawnVector = last == null ?
+                    new Vector3(areaVector.x - 0.1f, areaVector.y, areaVector.z) :
+                    new Vector3(last.transform.position.x - 0.15f, areaVector.y, areaVector.z);
+                last = Instantiate(answerPrefab, spawnVector, Quaternion.identity, answerArea.transform);
+            }
+        }
+    }
+
+    private void RemoveAnswerBoxes()
+    {
+        foreach (GameObject item in SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.tag.Equals("NumberObject")))
+        {
+            Destroy(item);
+        };
+        foreach (Transform transform in answerArea.transform)
+        {
+            Destroy(transform.gameObject);
+        }
+    }
+
+    public bool LastAssignment()
+    {
+        return currentAssignmentCount == amountOfAssignments;
     }
 }

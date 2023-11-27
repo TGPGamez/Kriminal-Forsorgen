@@ -10,7 +10,7 @@ public class DeleteNumber : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("BoardRelated"))
+        if (!other.gameObject.CompareTag("BoardRelated") && !other.gameObject.CompareTag("NumberObject"))
         {
             DestroyEvent?.Invoke();
             Destroy(gameObject);
