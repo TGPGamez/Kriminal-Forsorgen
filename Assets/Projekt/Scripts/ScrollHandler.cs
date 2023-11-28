@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,15 +11,26 @@ public class ScrollHandler : MonoBehaviour
 {
     [SerializeField] private GameObject scrollItemPrefab;
     [SerializeField] private Transform scrollViewContent;
-    [SerializeField] private List<BaseGuidName> dataToUI;
-    [SerializeField] private string informationHolderIdKey;
-    [SerializeField] private string informationHolderNameKey;
+    [SerializeField] private SceneChooseType sceneChooseType;
+    [SerializeField] private string informationHolderKeyPrefix;
+    [SerializeField] private string getInformationFromPrefix;
     [SerializeField] private string changeToSceneName;
     // Start is called before the first frame update
+    private List<BaseGuidName> dataToUI;
     private void Awake()
     {
-        Guid guid = InformationHolder.Get<Guid>("Subject.Id");
-        dataToUI = DataMock.GetMockModules(guid);
+        switch (sceneChooseType)
+        {
+            case SceneChooseType.Subject:
+                dataToUI = DataMock.GetMockSubjects();
+                break;
+            case SceneChooseType.Module:
+                dataToUI = DataMock.GetMockModules(InformationHolder.Get<Guid>(getInformationFromPrefix));
+                break;
+            case SceneChooseType.Assigment:
+                dataToUI = DataMock.GetMockAssigments(InformationHolder.Get<Guid>(getInformationFromPrefix));
+                break;
+        }
     }
 
     private void Start()
@@ -44,9 +57,24 @@ public class ScrollHandler : MonoBehaviour
     {
         if (change.isOn)
         {
-            InformationHolder.Set($"{informationHolderIdKey}.Id", data.Id);
-            InformationHolder.Set($"{informationHolderNameKey}.Id", data.Name);
-            SceneManager.LoadScene(changeToSceneName);
+            InformationHolder.Set($"{informationHolderKeyPrefix}.Id", data.Id);
+            InformationHolder.Set($"{informationHolderKeyPrefix}.Name", data.Name);
+            if (!string.IsNullOrEmpty(changeToSceneName))
+            {
+                SceneManager.LoadScene(changeToSceneName);
+            }
+            else
+            {
+                //Make an alternativ manager that will set the load the correct scene type
+                Debug.Log($"{data.Name} with Guid: {data.Id}");
+            }
         }
     }
+}
+
+public enum SceneChooseType
+{
+    Subject,
+    Module,
+    Assigment
 }

@@ -4038,7 +4038,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1249627261}
-  - component: {fileID: 1249627262}
+  - component: {fileID: 1249627263}
   m_Layer: 0
   m_Name: ScrollItems Handler
   m_TagString: Untagged
@@ -4061,7 +4061,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1249627262
+--- !u!114 &1249627263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4070,11 +4070,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1249627259}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb2d4241c8332b4cb44b3cb0c58f2df, type: 3}
+  m_Script: {fileID: 11500000, guid: a2b2467bfa2407947bf580dcd4a9760c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scrollItemPrefab: {fileID: 5330548114996237049, guid: 4d3b8d3804bc26145a636bebee2ac3df, type: 3}
   scrollViewContent: {fileID: 1139355844}
+  sceneChooseType: 1
+  informationHolderKeyPrefix: Module
+  getInformationFromPrefix: Subject.Id
+  changeToSceneName: ChooseAssignment
 --- !u!1001 &1273720166
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,6 +29,20 @@ public static class DataMock
         }
         return new List<BaseGuidName>();
     }
+
+    public static List<BaseGuidName> GetMockAssigments(Guid guid)
+    {
+        if (guid.ToString().Equals("059c7eea-1b1d-420d-ba24-1f13e9b4c8c1"))
+        {
+            return new List<BaseGuidName>()
+            {
+                new ModuleMockModel(new Guid("059c7eea-1b1d-420d-ba24-1f13e9b4c8c1"), "Opgave 1"),
+                new ModuleMockModel(new Guid("846ede18-550c-49b8-bff2-3feb3031330f"), "Opgave 2"),
+                new ModuleMockModel(new Guid("c2b80f08-b5cb-42c4-bc84-dc1e2047edd7"), "Opgave 3")
+            };
+        }
+        return new List<BaseGuidName>();
+    }
 }
 
 
