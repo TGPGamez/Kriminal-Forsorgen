@@ -16,6 +16,7 @@ public class AssignmentManager : MonoBehaviour
     [SerializeField] private GameObject answerArea;
     [SerializeField] private GameObject answerPrefab;
     [SerializeField] private GameObject correctAnswerBoard;
+    [SerializeField] private ResetSpawners resetSpawners;
     private int amountOfAssignments;
     private int currentAssignmentCount;
     private AlgeBraAssignment currentAssignment;
@@ -70,6 +71,7 @@ public class AssignmentManager : MonoBehaviour
 
     public void NextAssignment()
     {
+        if (resetSpawners != null) resetSpawners.ResetAll();
         if (!LastAssignment())
         {
             currentAssignmentCount++;
@@ -81,7 +83,7 @@ public class AssignmentManager : MonoBehaviour
             UpdateCanvases();
         } else
         {
-            SceneManager.LoadScene("ChooseModule");
+            SceneManager.LoadScene("ChooseSubject");
         }
     }
 

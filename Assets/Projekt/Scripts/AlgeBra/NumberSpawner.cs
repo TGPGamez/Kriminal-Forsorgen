@@ -35,6 +35,18 @@ public class NumberSpawner : MonoBehaviour
         deleteNumber.DestroyEvent.AddListener(DestroyedGO);
         deleteNumber.SnappedEvent.AddListener(Snapped);
     }
+
+    public void ResetSpawner()
+    {
+        foreach (Transform t in groupObjects.transform)
+        {
+            Destroy(t.gameObject);
+        }
+        if (CanSpawn())
+        {
+            Spawn();
+        }
+    }
     private void Snapped()
     {
         if (CanSpawn() && groupObjects.transform.childCount == 0)
