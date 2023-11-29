@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Net;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -24,7 +25,7 @@ public class ScrollHandler : MonoBehaviour
     private List<BaseGuidName> dataToUI;
     private void Awake()
     {
-        Test();
+        StartCoroutine(apiCaller.GetData("Subjects"));
         switch (sceneChooseType)
         {
             case SceneChooseType.Subject:
@@ -37,12 +38,6 @@ public class ScrollHandler : MonoBehaviour
                 dataToUI = DataMock.GetMockAssigments(InformationHolder.Get<Guid>(getInformationFromPrefix + ".Id"));
                 break;
         }
-    }
-
-    private void Test()
-    {
-
-        List<SubjectMockModel> subjects = apiCaller.Get<List<SubjectMockModel>>("Subjects").Result;
     }
 
     private void Start()

@@ -1,39 +1,36 @@
-using Newtonsoft.Json;
+
 using System.Net.Http;
+using UnityEngine;
+using System.Collections;
+using UnityEngine.Networking;
+using SimpleJSON;
 using System.Threading.Tasks;
-public class ApiCaller
+
+public class ApiCaller : MonoBehaviour
 {
-    private HttpClient _httpClient;
     private string _url;
 
     public ApiCaller()
     {
-        _httpClient = new HttpClient();
         _url = "https://fbmanage.dk/api/";
     }
 
-    public async Task<T> Get<T>(string uri)
+    public JSONNode GetData()
     {
-        var result = await InvokeGet(uri);
-
-        if (result.IsSuccessStatusCode)
+        using (UnityWebRequest request = UnityWebRequest.Get(GetUrl("Subjects")))
         {
-            string jsonResponse = await result.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(jsonResponse);
+            request.SendWebRequest();
+            if (request.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.Log(request.error);
+            } else
+            {
+                JSONNode itemsData = JSON.Parse(request.downloadHandler.text);
+                return itemsData;
+            }
         }
-        else
-        {
-            // Handle non-success status code here if needed
-            // For example, you might want to throw an exception
-            throw new HttpRequestException($"Failed to retrieve data. Status code: {result.StatusCode}");
-        }
+        return null;
     }
-    private async Task<HttpResponseMessage> InvokeGet(string uri)
-    {
-        var response = await _httpClient.GetAsync(GetUrl(uri));
-        return response;
-    }
-
 
     private string GetUrl(string uri)
     {

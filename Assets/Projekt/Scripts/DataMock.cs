@@ -56,9 +56,13 @@ public static class DataMock
     }
 }
 
-
+[Serializable]
 public class SubjectMockModel : BaseGuidName
 {
+    public SubjectMockModel() : base()
+    {
+        
+    }
     public SubjectMockModel(Guid id, string name) : base(id, name)
     {
     }
