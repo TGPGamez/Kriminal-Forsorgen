@@ -9,43 +9,35 @@ using UnityEngine.SceneManagement;
 public class AssignmentManager : MonoBehaviour
 {
     [SerializeField] private string moduleName;
-    [SerializeField] private TextMeshProUGUI assignmentInfo;
+    [SerializeField] private TextMeshProUGUI assignmentName;
     [SerializeField] private TextMeshProUGUI assignmentText;
     [SerializeField] private TextMeshProUGUI moduleText;
-    [SerializeField] private List<AlgeBraAssignment> assignments;
     [SerializeField] private GameObject answerArea;
     [SerializeField] private GameObject answerPrefab;
     [SerializeField] private GameObject correctAnswerBoard;
     [SerializeField] private ResetSpawners resetSpawners;
-    private int amountOfAssignments;
-    private int currentAssignmentCount;
-    private AlgeBraAssignment currentAssignment;
-    public AlgeBraAssignment CurrentAssignment { get { return currentAssignment; } }
+    private AssigmentMockModel currentAssigment;
+    private AssigmentMockModel nextAssignment;
+
+    private void Awake()
+    {
+        //Recieve current assignment
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         moduleText.text = moduleName;
-        LoadAssignments();
-        amountOfAssignments = assignments.Count;
-        currentAssignmentCount = 1;
-        currentAssignment = assignments.First();
         GenerateAnswerBoxes();
         UpdateCanvases();
+        //Load next assigment
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-    private void LoadAssignments()
-    { //"3(8+2−4)", "18", "8 * (5 + 10)", "120"
-        assignments.Add(AlgeBraAssignment.CreateComponent(gameObject, "3(8+2−4)", "18"));
-        assignments.Add(AlgeBraAssignment.CreateComponent(gameObject, "8 * (5 + 10)", "120"));
-    }
+    //private void LoadAssignments()
+    //{ //"3(8+2−4)", "18", "8 * (5 + 10)", "120"
+    //    assignments.Add(AlgeBraAssignment.CreateComponent(gameObject, "3(8+2−4)", "18"));
+    //    assignments.Add(AlgeBraAssignment.CreateComponent(gameObject, "8 * (5 + 10)", "120"));
+    //}
 
     public void UpdateCanvases()
     {
@@ -55,9 +47,9 @@ public class AssignmentManager : MonoBehaviour
 
     private void UpdateAssignmentInfo()
     {
-        if (assignmentInfo != null)
+        if (assignmentName != null)
         {
-            assignmentInfo.text = $"Opgave {currentAssignmentCount}/{amountOfAssignments}";
+            assignmentName.text = $"{currentAssigment.Name}";
         }
     }
 
@@ -65,7 +57,7 @@ public class AssignmentManager : MonoBehaviour
     {
         if (assignmentText != null)
         {
-            assignmentText.text = $"{currentAssignment.AssignmentText}";
+            assignmentText.text = $"{currentAssigment.Question}";
         }
     }
 
@@ -74,9 +66,7 @@ public class AssignmentManager : MonoBehaviour
         if (resetSpawners != null) resetSpawners.ResetAll();
         if (!LastAssignment())
         {
-            currentAssignmentCount++;
-            assignments.RemoveAt(0);
-            currentAssignment = assignments.First();
+            currentAssigment = nextAssignment;
             correctAnswerBoard.SetActive(false);
             RemoveAnswerBoxes();
             GenerateAnswerBoxes();
@@ -94,7 +84,7 @@ public class AssignmentManager : MonoBehaviour
         {
             GameObject last = null;
             Vector3 areaVector = answerArea.transform.position;
-            for (int i = 0; i < currentAssignment.Result.Length; i++)
+            for (int i = 0; i < nextAssignment.Answer.Length; i++)
             {
 
                 Vector3 spawnVector = last == null ?
@@ -119,6 +109,6 @@ public class AssignmentManager : MonoBehaviour
 
     public bool LastAssignment()
     {
-        return currentAssignmentCount == amountOfAssignments;
+        return currentAssigment.NextAssignmentId == null;
     }
 }

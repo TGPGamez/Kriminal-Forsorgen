@@ -7,8 +7,10 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class ScrollHandler : MonoBehaviour
 {
+    [SerializeField] SceneHandler sceneHandler;
     [SerializeField] private GameObject scrollItemPrefab;
     [SerializeField] private Transform scrollViewContent;
     [SerializeField] private SceneChooseType sceneChooseType;
@@ -25,10 +27,10 @@ public class ScrollHandler : MonoBehaviour
                 dataToUI = DataMock.GetMockSubjects();
                 break;
             case SceneChooseType.Module:
-                dataToUI = DataMock.GetMockModules(InformationHolder.Get<Guid>(getInformationFromPrefix));
+                dataToUI = DataMock.GetMockModules(InformationHolder.Get<Guid>(getInformationFromPrefix + ".Id"));
                 break;
             case SceneChooseType.Assigment:
-                dataToUI = DataMock.GetMockAssigments(InformationHolder.Get<Guid>(getInformationFromPrefix));
+                dataToUI = DataMock.GetMockAssigments(InformationHolder.Get<Guid>(getInformationFromPrefix + ".Id"));
                 break;
         }
     }
@@ -61,12 +63,11 @@ public class ScrollHandler : MonoBehaviour
             InformationHolder.Set($"{informationHolderKeyPrefix}.Name", data.Name);
             if (!string.IsNullOrEmpty(changeToSceneName))
             {
-                SceneManager.LoadScene(changeToSceneName);
+                sceneHandler.ChangeScene(changeToSceneName);
             }
             else
             {
-                //Make an alternativ manager that will set the load the correct scene type
-                Debug.Log($"{data.Name} with Guid: {data.Id}");
+                sceneHandler.LoadAssigment(InformationHolder.Get<string>(getInformationFromPrefix + ".Name"));
             }
         }
     }
