@@ -18,7 +18,6 @@ public class AssignmentManager : MonoBehaviour
     [SerializeField] private ResetSpawners resetSpawners;
     private AssigmentMockModel currentAssigment;
     private AssigmentMockModel nextAssignment;
-
     private void Awake()
     {
         //Recieve current assignment
@@ -110,5 +109,10 @@ public class AssignmentManager : MonoBehaviour
     public bool LastAssignment()
     {
         return currentAssigment.NextAssignmentId == null;
+    }
+
+    public bool IsCorrectAnswer(string result)
+    {
+        return result.Equals(currentAssigment.Answer);
     }
 }

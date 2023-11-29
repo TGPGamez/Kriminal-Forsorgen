@@ -7327,6 +7327,7 @@ MonoBehaviour:
   informationHolderKeyPrefix: Subject
   getInformationFromPrefix: Subject
   changeToSceneName: ChooseModule
+  apiCaller: {fileID: 0}
 --- !u!1001 &2098550699
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class ResultHandler : MonoBehaviour
     {
         List<SelectedSnapPoint> snapPoints = GetAttachedSnappedObjects();
         string result = AttachedSnappedObjectsToResult(snapPoints);
-        if (result.Equals(assignmentManager.CurrentAssignment.Result))
+        if (assignmentManager.IsCorrectAnswer(result))
         {
             HighlightAnswerResult(true);
             LastAssignmentSetText();

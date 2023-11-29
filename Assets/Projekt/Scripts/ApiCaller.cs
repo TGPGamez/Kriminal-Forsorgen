@@ -1,6 +1,6 @@
+using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
-
 public class ApiCaller
 {
     private HttpClient _httpClient;
@@ -17,21 +17,21 @@ public class ApiCaller
         var result = await InvokeGet(uri);
 
         if (result.IsSuccessStatusCode)
-            return await result.Content.ReadFromJsonAsync<T>();
-
+        {
+            string jsonResponse = await result.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(jsonResponse);
+        }
         else
-            return default(T);
+        {
+            // Handle non-success status code here if needed
+            // For example, you might want to throw an exception
+            throw new HttpRequestException($"Failed to retrieve data. Status code: {result.StatusCode}");
+        }
     }
     private async Task<HttpResponseMessage> InvokeGet(string uri)
     {
         var response = await _httpClient.GetAsync(GetUrl(uri));
         return response;
-    }
-
-    public async Task<bool> Post<T>(string uri, T obj)
-    {
-        var response = await _httpClient.PostAsJsonAsync(GetUrl(uri), obj);
-        return response.IsSuccessStatusCode;
     }
 
 

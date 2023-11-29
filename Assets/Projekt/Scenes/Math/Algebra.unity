@@ -4040,10 +4040,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moduleName: Mat - Algebra
-  assignmentInfo: {fileID: 1613536928}
+  assignmentName: {fileID: 0}
   assignmentText: {fileID: 982233844}
   moduleText: {fileID: 1390839958}
-  assignments: []
   answerArea: {fileID: 252770677}
   answerPrefab: {fileID: 4515635400272979250, guid: d5d15e68885d7b14cab4daf093aca6db, type: 3}
   correctAnswerBoard: {fileID: 1643708781}

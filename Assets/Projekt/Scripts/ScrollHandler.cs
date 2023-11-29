@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
+using System.Net;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -17,10 +19,12 @@ public class ScrollHandler : MonoBehaviour
     [SerializeField] private string informationHolderKeyPrefix;
     [SerializeField] private string getInformationFromPrefix;
     [SerializeField] private string changeToSceneName;
+    [SerializeField] private ApiCaller apiCaller;
     // Start is called before the first frame update
     private List<BaseGuidName> dataToUI;
     private void Awake()
     {
+        Test();
         switch (sceneChooseType)
         {
             case SceneChooseType.Subject:
@@ -33,6 +37,12 @@ public class ScrollHandler : MonoBehaviour
                 dataToUI = DataMock.GetMockAssigments(InformationHolder.Get<Guid>(getInformationFromPrefix + ".Id"));
                 break;
         }
+    }
+
+    private void Test()
+    {
+
+        List<SubjectMockModel> subjects = apiCaller.Get<List<SubjectMockModel>>("Subjects").Result;
     }
 
     private void Start()
