@@ -25,7 +25,6 @@ public class ScrollHandler : MonoBehaviour
     private List<BaseGuidName> dataToUI;
     private void Awake()
     {
-        StartCoroutine(apiCaller.GetData("Subjects"));
         switch (sceneChooseType)
         {
             case SceneChooseType.Subject:
@@ -42,6 +41,7 @@ public class ScrollHandler : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(apiCaller.GetData("Subjects"));
         GenerateChooses();
     }
 

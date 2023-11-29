@@ -15,21 +15,21 @@ public class ApiCaller : MonoBehaviour
         _url = "https://fbmanage.dk/api/";
     }
 
-    public JSONNode GetData()
+    public IEnumerator GetData(string uri)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(GetUrl("Subjects")))
+        using (UnityWebRequest request = UnityWebRequest.Get(GetUrl(uri)))
         {
-            request.SendWebRequest();
+            yield return request.SendWebRequest();
             if (request.result == UnityWebRequest.Result.ConnectionError)
             {
                 Debug.Log(request.error);
             } else
             {
                 JSONNode itemsData = JSON.Parse(request.downloadHandler.text);
-                return itemsData;
+                Debug.Log(itemsData);
             }
         }
-        return null;
+
     }
 
     private string GetUrl(string uri)
