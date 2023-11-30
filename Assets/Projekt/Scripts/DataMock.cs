@@ -120,6 +120,10 @@ public class AssigmentMockModel : BaseGuidName
     public string Answer { get; set; }
     public Guid? NextAssignmentId { get; set; }
 
+    public AssigmentMockModel() : base()
+    {
+        
+    }
     public AssigmentMockModel(Guid? id, string name) : base(id, name)
     {
     }

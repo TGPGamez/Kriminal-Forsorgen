@@ -44,10 +44,13 @@ public class ScrollHandler : MonoBehaviour
                 dataToUI = apiCaller.GetSubjects();
                 break;
             case SceneChooseType.Module:
-                dataToUI = apiCaller.GetModules(InformationHolder.Get<Guid>(getInformationFromPrefix + ".Id").ToString());
+                dataToUI = apiCaller.GetModules(InformationHolder.Get<Guid>("Subject.Id").ToString());
                 break;
             case SceneChooseType.Assigment:
-                dataToUI = DataMock.GetMockAssigments(InformationHolder.Get<Guid>(getInformationFromPrefix + ".Id"));
+                dataToUI = apiCaller.GetAssignments(InformationHolder.Get<Guid>("Subject.Id").ToString(),
+                    InformationHolder.Get<Guid>("Module.Id").ToString());
+                break;
+            default:
                 break;
         }
     }

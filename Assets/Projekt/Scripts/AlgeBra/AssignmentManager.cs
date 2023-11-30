@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -16,14 +17,18 @@ public class AssignmentManager : MonoBehaviour
     [SerializeField] private GameObject answerPrefab;
     [SerializeField] private GameObject correctAnswerBoard;
     [SerializeField] private ResetSpawners resetSpawners;
+    [SerializeField] private ApiCaller apiCaller;
     private AssigmentMockModel currentAssigment;
     private AssigmentMockModel nextAssignment;
     private void Awake()
     {
         //Recieve current assignment
-
-        currentAssigment = DataMock.GetAssigment(DataMock.GetMockAssigments(new System.Guid("059c7eea-1b1d-420d-ba24-1f13e9b4c8c1")).First().Id);
-        Debug.Log(currentAssigment.Answer);
+        //
+        currentAssigment = apiCaller.GetAssigment(
+                InformationHolder.Get<Guid>("Subject.Id").ToString(),
+                InformationHolder.Get<Guid>("Module.Id").ToString(),
+                InformationHolder.Get<Guid>("Assignment.Id").ToString()
+            );
     }
 
     // Start is called before the first frame update

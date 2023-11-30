@@ -30,6 +30,18 @@ public class ApiCaller : MonoBehaviour
         return data.ToSimpleBaseGuidList();
     }
 
+    public List<BaseGuidName> GetAssignments(string subjectId, string moduleId)
+    {
+        JSONNode data = GetData($"Subjects/{subjectId}/Modules/{moduleId}");
+        return data.ToSimpleBaseGuidList();
+    }
+
+    public AssigmentMockModel GetAssigment(string subjectId, string moduleId, string assignmentId)
+    {
+        JSONObject data = GetData($"Subjects/{subjectId}/Modules/{moduleId}/Assignments/{assignmentId}").AsObject;
+        return data.ToAssigment();
+    }
+
 
     private JSONNode GetData(string uri)
     {

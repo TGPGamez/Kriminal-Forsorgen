@@ -13,6 +13,18 @@ public static class JSONNodeExtension
         return new(new(jsonObject["id"]), jsonObject["name"]);
     }
 
+    public static AssigmentMockModel ToAssigment(this JSONObject jsonObject)
+    {
+        if (jsonObject == null) return new AssigmentMockModel();
+        return new(
+            new(jsonObject["id"]),
+            jsonObject["name"],
+            jsonObject["question"],
+            jsonObject["answer"],
+            new(jsonObject["nextAssignmentId"])
+        );
+    }
+
     #endregion
 
     #region To List of objects extensions
