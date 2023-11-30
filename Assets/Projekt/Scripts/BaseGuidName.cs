@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public abstract class BaseGuidName
 {
-    public BaseGuidName(Guid id, string name)
+    public BaseGuidName(Guid? id, string name)
     {
         Id = id;
         Name = name;
@@ -17,6 +17,6 @@ public abstract class BaseGuidName
         
     }
 
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
     public string Name { get; set; }
 }

@@ -1,3 +1,4 @@
+using SimpleJSON;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,18 +21,30 @@ public class ScrollHandler : MonoBehaviour
     [SerializeField] private string informationHolderKeyPrefix;
     [SerializeField] private string getInformationFromPrefix;
     [SerializeField] private string changeToSceneName;
+    [SerializeField] private string changeBackSceneName;
     [SerializeField] private ApiCaller apiCaller;
+    [SerializeField] private Button backButton;
     // Start is called before the first frame update
     private List<BaseGuidName> dataToUI;
     private void Awake()
     {
+        if (backButton != null)
+        {
+            if (string.IsNullOrEmpty(changeBackSceneName))
+            {
+                backButton.gameObject.SetActive(false);
+            } else
+            {
+                backButton.onClick.AddListener(delegate { sceneHandler.ChangeScene(changeBackSceneName); });
+            }
+        }
         switch (sceneChooseType)
         {
             case SceneChooseType.Subject:
-                dataToUI = DataMock.GetMockSubjects();
+                dataToUI = apiCaller.GetSubjects();
                 break;
             case SceneChooseType.Module:
-                dataToUI = DataMock.GetMockModules(InformationHolder.Get<Guid>(getInformationFromPrefix + ".Id"));
+                dataToUI = apiCaller.GetModules(InformationHolder.Get<Guid>(getInformationFromPrefix + ".Id").ToString());
                 break;
             case SceneChooseType.Assigment:
                 dataToUI = DataMock.GetMockAssigments(InformationHolder.Get<Guid>(getInformationFromPrefix + ".Id"));
@@ -41,7 +54,7 @@ public class ScrollHandler : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(apiCaller.GetData("Subjects"));
+        
         GenerateChooses();
     }
 

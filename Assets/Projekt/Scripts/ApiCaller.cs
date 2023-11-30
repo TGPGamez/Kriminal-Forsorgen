@@ -5,6 +5,9 @@ using System.Collections;
 using UnityEngine.Networking;
 using SimpleJSON;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
 
 public class ApiCaller : MonoBehaviour
 {
@@ -15,20 +18,27 @@ public class ApiCaller : MonoBehaviour
         _url = "https://fbmanage.dk/api/";
     }
 
-    public IEnumerator GetData(string uri)
+    public List<BaseGuidName> GetSubjects()
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(GetUrl(uri)))
-        {
-            yield return request.SendWebRequest();
-            if (request.result == UnityWebRequest.Result.ConnectionError)
-            {
-                Debug.Log(request.error);
-            } else
-            {
-                JSONNode itemsData = JSON.Parse(request.downloadHandler.text);
-                Debug.Log(itemsData);
-            }
-        }
+        JSONNode data = GetData("Subjects");
+        return data.ToSimpleBaseGuidList();
+    }
+
+    public List<BaseGuidName> GetModules(string subjectId)
+    {
+        JSONNode data = GetData($"Subjects/{subjectId}/Modules");
+        return data.ToSimpleBaseGuidList();
+    }
+
+
+    private JSONNode GetData(string uri)
+    {
+        HttpWebRequest request =
+          (HttpWebRequest)WebRequest.Create(GetUrl(uri));
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        return JSON.Parse(jsonResponse);
 
     }
 

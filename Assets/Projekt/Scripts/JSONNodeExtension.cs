@@ -6,32 +6,25 @@ using UnityEngine;
 
 public static class JSONNodeExtension
 {
-    public static SubjectMockModel ToSubject(this JSONNode node)
+    #region To single object extensions
+    public static SubjectMockModel ToSimpleBaseGuid(this JSONObject jsonObject)
     {
-        if (node == null) return new SubjectMockModel();
-        SubjectMockModel subject = new SubjectMockModel();
-
-        subject.Id = Valid<Guid>(node["id"]);
-        subject.Name = Valid<string>(node["name"]);
-
-        return subject;
+        if (jsonObject == null) return new SubjectMockModel();
+        return new(new(jsonObject["id"]), jsonObject["name"]);
     }
 
-    public static List<SubjectMockModel> ToSubjectList(this JSONNode data)
+    #endregion
+
+    #region To List of objects extensions
+    public static List<BaseGuidName> ToSimpleBaseGuidList(this JSONNode data)
     {
-        Debug.Log(data);
-        foreach (JSONNode item in data) 
+        List<BaseGuidName> list = new List<BaseGuidName>();
+        foreach (JSONObject item in data) 
         {
-            Debug.Log(item.Value);
+            list.Add(ToSimpleBaseGuid(item));
         }
-
-        return new List<SubjectMockModel>();
+        return list;
     }
 
-
-    private static T Valid<T>(this object value)
-    {
-        if (value == null) return default;
-        return (T)value;
-    }
+    #endregion
 }

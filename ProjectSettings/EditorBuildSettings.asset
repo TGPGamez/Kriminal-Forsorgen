@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Projekt/Scenes/Math/Algebra.unity
+    guid: 36b9d0a9284549a4cb91ce76c241144a
+  - enabled: 1
     path: Assets/Projekt/Scenes/ChooseSubject.unity
     guid: af4f267301879e74ea939673eb2ee779
   - enabled: 1
@@ -14,9 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Projekt/Scenes/ChooseAssignment.unity
     guid: 9aab620613445d648bd73bdafa8657b0
-  - enabled: 1
-    path: Assets/Projekt/Scenes/Math/Algebra.unity
-    guid: 36b9d0a9284549a4cb91ce76c241144a
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: caad1e765b65b0643bcad044705b6da8, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 657a304b2d3ec524fb4ce17e98b4093d, type: 2}

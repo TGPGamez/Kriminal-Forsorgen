@@ -21,6 +21,9 @@ public class AssignmentManager : MonoBehaviour
     private void Awake()
     {
         //Recieve current assignment
+
+        currentAssigment = DataMock.GetAssigment(DataMock.GetMockAssigments(new System.Guid("059c7eea-1b1d-420d-ba24-1f13e9b4c8c1")).First().Id);
+        Debug.Log(currentAssigment.Answer);
     }
 
     // Start is called before the first frame update
@@ -29,14 +32,8 @@ public class AssignmentManager : MonoBehaviour
         moduleText.text = moduleName;
         GenerateAnswerBoxes();
         UpdateCanvases();
-        //Load next assigment
+        nextAssignment = DataMock.GetAssigment(currentAssigment.NextAssignmentId);
     }
-
-    //private void LoadAssignments()
-    //{ //"3(8+2−4)", "18", "8 * (5 + 10)", "120"
-    //    assignments.Add(AlgeBraAssignment.CreateComponent(gameObject, "3(8+2−4)", "18"));
-    //    assignments.Add(AlgeBraAssignment.CreateComponent(gameObject, "8 * (5 + 10)", "120"));
-    //}
 
     public void UpdateCanvases()
     {
@@ -70,6 +67,7 @@ public class AssignmentManager : MonoBehaviour
             RemoveAnswerBoxes();
             GenerateAnswerBoxes();
             UpdateCanvases();
+            nextAssignment = DataMock.GetAssigment(currentAssigment.NextAssignmentId);
         } else
         {
             SceneManager.LoadScene("ChooseSubject");
@@ -83,9 +81,8 @@ public class AssignmentManager : MonoBehaviour
         {
             GameObject last = null;
             Vector3 areaVector = answerArea.transform.position;
-            for (int i = 0; i < nextAssignment.Answer.Length; i++)
+            for (int i = 0; i < currentAssigment.Answer.Length; i++)
             {
-
                 Vector3 spawnVector = last == null ?
                     new Vector3(areaVector.x - 0.1f, areaVector.y, areaVector.z) :
                     new Vector3(last.transform.position.x - 0.15f, areaVector.y, areaVector.z);
@@ -115,4 +112,7 @@ public class AssignmentManager : MonoBehaviour
     {
         return result.Equals(currentAssigment.Answer);
     }
+
+
+   
 }

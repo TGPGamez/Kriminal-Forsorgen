@@ -45,7 +45,10 @@ public class ResultHandler : MonoBehaviour
     private IEnumerator BackToOriginalMat(MeshRenderer meshRenderer, Material original)
     {
         yield return new WaitForSeconds(3f);
-        meshRenderer.material = original;
+        if (meshRenderer != null)
+        {
+            meshRenderer.material = original;
+        }
     }
 
     private List<SelectedSnapPoint> GetAttachedSnappedObjects()
