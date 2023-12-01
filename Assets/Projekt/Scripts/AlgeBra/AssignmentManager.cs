@@ -37,7 +37,7 @@ public class AssignmentManager : MonoBehaviour
         moduleText.text = moduleName;
         GenerateAnswerBoxes();
         UpdateCanvases();
-        nextAssignment = DataMock.GetAssigment(currentAssigment.NextAssignmentId);
+        SetNextAssignment();
     }
 
     public void UpdateCanvases()
@@ -72,10 +72,22 @@ public class AssignmentManager : MonoBehaviour
             RemoveAnswerBoxes();
             GenerateAnswerBoxes();
             UpdateCanvases();
-            nextAssignment = DataMock.GetAssigment(currentAssigment.NextAssignmentId);
+            SetNextAssignment();
         } else
         {
-            SceneManager.LoadScene("ChooseSubject");
+            SceneManager.LoadScene("ChooseModule");
+        }
+    }
+
+    private void SetNextAssignment()
+    {
+        if (currentAssigment.NextAssignmentId != Guid.Empty)
+        {
+            nextAssignment = apiCaller.GetAssigment(
+                    InformationHolder.Get<Guid>("Subject.Id").ToString(),
+                    InformationHolder.Get<Guid>("Module.Id").ToString(),
+                    currentAssigment.NextAssignmentId.ToString()
+                );
         }
     }
 
@@ -110,7 +122,7 @@ public class AssignmentManager : MonoBehaviour
 
     public bool LastAssignment()
     {
-        return currentAssigment.NextAssignmentId == null;
+        return currentAssigment.NextAssignmentId == Guid.Empty;
     }
 
     public bool IsCorrectAnswer(string result)

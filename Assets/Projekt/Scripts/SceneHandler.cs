@@ -13,7 +13,6 @@ public class SceneHandler : MonoBehaviour
 
     public void LoadAssigment(string sceneName)
     {
-        Debug.Log(sceneName);
         switch (sceneName.ToLower())
         {
             case "algebra":

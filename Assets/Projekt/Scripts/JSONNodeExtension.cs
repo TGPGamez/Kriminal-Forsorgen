@@ -16,12 +16,13 @@ public static class JSONNodeExtension
     public static AssigmentMockModel ToAssigment(this JSONObject jsonObject)
     {
         if (jsonObject == null) return new AssigmentMockModel();
+        Guid nextGuid = jsonObject["nextAssignmentId"] == null ? new Guid() : new Guid(jsonObject["nextAssignmentId"]);
         return new(
             new(jsonObject["id"]),
             jsonObject["name"],
             jsonObject["question"],
             jsonObject["answer"],
-            new(jsonObject["nextAssignmentId"])
+            nextGuid
         );
     }
 
