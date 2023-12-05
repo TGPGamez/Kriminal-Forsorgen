@@ -75,7 +75,7 @@ public class AssignmentManager : MonoBehaviour
             SetNextAssignment();
         } else
         {
-            SceneManager.LoadScene("ChooseModule");
+            SceneManager.LoadScene("ChooseAssignment");
         }
     }
 
