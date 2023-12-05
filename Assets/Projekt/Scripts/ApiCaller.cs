@@ -36,7 +36,7 @@ public class ApiCaller : MonoBehaviour
         return data.ToSimpleBaseGuidList();
     }
 
-    public AssigmentMockModel GetAssigment(string subjectId, string moduleId, string assignmentId)
+    public AssigmentModel GetAssigment(string subjectId, string moduleId, string assignmentId)
     {
         JSONObject data = GetData($"Subjects/{subjectId}/Modules/{moduleId}/Assignments/{assignmentId}").AsObject;
         return data.ToAssigment();

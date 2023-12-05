@@ -10,7 +10,7 @@ public class SelectedSnapPoint : XRSocketInteractor
     {
         base.OnSelectEntered(args);
         GameObject interactObject = args.interactableObject.transform.gameObject;
-        DeleteNumber? deleteNumber = interactObject.GetComponent<DeleteNumber>();
+        NumberEvents? deleteNumber = interactObject.GetComponent<NumberEvents>();
         if (deleteNumber != null)
         {
             attachedObject = interactObject;

@@ -21,32 +21,51 @@ public class NumberSpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if number object can be spawned
+    /// </summary>
+    /// <returns>boolean</returns>
     private bool CanSpawn()
     {
         return spawnPrefab != null && spawnPoint != null;
     }
 
+    /// <summary>
+    /// Spawn number object and add neccesary scripts and components to gameobject
+    /// </summary>
     private void Spawn()
     {
+        //Instantiate object
         GameObject obj = Instantiate(spawnPrefab, spawnPoint.transform.position, Quaternion.identity, groupObjects.transform);
+        //Set text to the right number from spawner
         obj.GetComponentInChildren<TextMeshProUGUI>().text = displayText;
 
-        DeleteNumber deleteNumber = obj.GetComponent<DeleteNumber>();
+        //Add Number events
+        NumberEvents deleteNumber = obj.GetComponent<NumberEvents>();
         deleteNumber.DestroyEvent.AddListener(DestroyedGO);
         deleteNumber.SnappedEvent.AddListener(Snapped);
     }
 
+    /// <summary>
+    /// Reset spawner
+    /// </summary>
     public void ResetSpawner()
     {
+        //Destroy all number objects
         foreach (Transform t in groupObjects.transform)
         {
             Destroy(t.gameObject);
         }
+        //Check if can spawn new
         if (CanSpawn())
         {
             Spawn();
         }
     }
+
+    /// <summary>
+    /// Method called when number object snap event has occured
+    /// </summary>
     private void Snapped()
     {
         if (CanSpawn() && groupObjects.transform.childCount == 0)
@@ -54,6 +73,10 @@ public class NumberSpawner : MonoBehaviour
             Spawn();
         }
     }
+
+    /// <summary>
+    /// Method called when number gameobject is destroyed
+    /// </summary>
     private void DestroyedGO()
     {
         

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Class that can change scene in different ways
+/// </summary>
 public class SceneHandler : MonoBehaviour
 {
     [SerializeField] private string changeToSceneName;
@@ -11,9 +14,13 @@ public class SceneHandler : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void LoadAssigment(string sceneName)
+    /// <summary>
+    /// Method to load specific scene out from a type
+    /// </summary>
+    /// <param name="sceneType">scene type</param>
+    public void LoadAssigment(string sceneType)
     {
-        switch (sceneName.ToLower())
+        switch (sceneType.ToLower())
         {
             case "algebra":
                 SceneManager.LoadScene("Algebra");
