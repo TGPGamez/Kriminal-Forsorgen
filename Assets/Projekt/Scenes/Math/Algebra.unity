@@ -2233,7 +2233,7 @@ MonoBehaviour:
   markResponseAnswerObjects:
   - {fileID: 252770677}
   wrongAnswerMaterial: {fileID: 2100000, guid: 04ae38994e543dd498697834f3c1c70d, type: 2}
-  correctAnserMaterial: {fileID: 2100000, guid: 96fa7017844351d4caac8fb9b697156f, type: 2}
+  correctAnswerMaterial: {fileID: 2100000, guid: 96fa7017844351d4caac8fb9b697156f, type: 2}
   correctAnswerBoard: {fileID: 1643708781}
 --- !u!4 &472196417
 Transform:

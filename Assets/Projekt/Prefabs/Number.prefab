@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3938196979258494156}
   - component: {fileID: 8215101055725748318}
   - component: {fileID: 7071627785753236577}
-  - component: {fileID: -6090688794434776953}
+  - component: {fileID: 3742474750522302897}
   m_Layer: 0
   m_Name: Number
   m_TagString: NumberObject
@@ -239,7 +239,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.06805103, z: 0.5}
   m_Center: {x: 0, y: 0.0040255077, z: 0}
---- !u!114 &-6090688794434776953
+--- !u!114 &3742474750522302897
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2050160876582275394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c2299febd481a84fa47f6a9b8f73460, type: 3}
+  m_Script: {fileID: 11500000, guid: 09a1b0f3f58f43349be6d9f6eeb5f68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyEvent:
